@@ -35,6 +35,7 @@ const CONFIG = {
     { color: 'yellow', text: '重要證件、現金、手機與<b>行動電源</b>請放在隨身行李。行動電源不可托運。' },
     { color: 'blue',   text: '澳洲海關檢疫很嚴格：<b>肉製品、新鮮蔬果、蛋、種子</b>都不要帶；有帶食物或藥品，入境卡一律勾「Yes」申報。' },
   ],
+   reminder: { show: true, name: '維良', title: '維良的叮嚀', photo: 'photos/image.png', photoFocus: '100% 55%', photoZoom: 1.55, say: '帶著愉快的心，出發囉！', item: '帶著愉快的心' },
 
   /* ---------- 清單內容 ----------
      分成三大類：must（必帶證件，紅色）、carry（隨身行李）、check（托運行李）
@@ -173,3 +174,4 @@ const CONFIG = {
   img.onerror = function () { pics.forEach(function (e) { e.style.display = 'none'; }); };
   img.src = 'image.png?t=' + Date.now();
 })();
+window.addEventListener('DOMContentLoaded', function () { var R = CONFIG.reminder; if (!R || !R.show) return; var st = document.createElement('style'); st.textContent = '.wl{margin-top:16px;background:var(--card);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}.wl .ph{aspect-ratio:4/3;overflow:hidden}.wl .ph img{display:block;width:100%;height:100%;object-fit:cover}.wl .in{padding:16px 18px 18px}.wl .who{font-weight:900;color:var(--green-dark);font-size:17px}.wl .say{position:relative;margin-top:12px;background:var(--green-soft);border-radius:16px;padding:12px 16px;font-size:19px;font-weight:900;color:var(--green-dark)}.wl .say::before{content:"";position:absolute;left:22px;top:-8px;border:8px solid transparent;border-top:0;border-bottom-color:var(--green-soft)}.wl .wl-check{margin-top:12px;box-shadow:none;border:2px solid var(--gold)}'; document.head.appendChild(st); var t = document.querySelector('#v-trip .sec-title'); if (t) t.insertAdjacentHTML('beforebegin', '<div id="wlCard"></div>'); function renderWL() { var box = document.getElementById('wlCard'); if (!box) return; var f = null; state.groups.must.sections.forEach(function (sec) { sec.items.forEach(function (it) { if (!f && it.name === R.item) f = { it: it, sec: sec }; }); }); if (!f) { box.innerHTML = ''; return; } var pos = R.photoFocus || '50% 50%'; box.innerHTML = '<div class="wl">' + (R.photo ? '<div class="ph"><img src="' + R.photo + '" alt="" style="object-position:' + pos + ';transform:scale(' + (R.photoZoom || 1) + ');transform-origin:' + pos + '"></div>' : '') + '<div class="in"><div class="who">💬 ' + esc(R.title) + '</div><div class="say">' + esc(R.say) + '</div><div class="items wl-check" data-group="must">' + itemRow(f.it, f.sec.id).replace(' hidden>', '>') + '</div></div></div>'; } var _r = render; render = function () { _r(); renderWL(); }; renderWL(); });
