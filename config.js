@@ -35,7 +35,7 @@ const CONFIG = {
     { color: 'yellow', text: '重要證件、現金、手機與<b>行動電源</b>請放在隨身行李。行動電源不可托運。' },
     { color: 'blue',   text: '澳洲海關檢疫很嚴格：<b>肉製品、新鮮蔬果、蛋、種子</b>都不要帶；有帶食物或藥品，入境卡一律勾「Yes」申報。' },
   ],
-   reminder: { show: true, name: '維良', title: '維良的叮嚀', photo: 'photos/image.png', photoFocus: '100% 55%', photoZoom: 1.55, say: '帶著愉快的心，出發囉！', item: '帶著愉快的心' },
+   reminder: { show: true, name: '維良', title: '維良的叮嚀', photo: '', say: '帶著愉快的心，出發囉！', item: '帶著愉快的心' },
 
   /* ---------- 清單內容 ----------
      分成三大類：must（必帶證件，紅色）、carry（隨身行李）、check（托運行李）
