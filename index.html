@@ -453,7 +453,7 @@ function fillStatic(){
   $('cRoute').innerHTML = C.route.map(r => `<span class="chip">${esc(r)}</span>`).join('');
   $('cTitle').textContent = C.pageTitle; $('cType').textContent = C.tripType;
   $('cTips').innerHTML = (C.tips || []).map(t => `<div class="tip ${t.color === 'blue' ? 'blue' : ''}">${TIP_ICON[t.color === 'blue' ? 'blue' : 'yellow']}<div>${t.text}</div></div>`).join('');
-  document.title = `${C.badge.replace(/^\W+/, '')}・${C.subtitle}`;
+  document.title = '木子團・' + C.subtitle;
 }
 fillStatic();
 route();
