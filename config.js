@@ -153,7 +153,7 @@ const CONFIG = {
    （使用 repo 裡的 logo.png，自動裁出旗子正面、背面與 MT 圖示）
    ===================================================================== */
 (function () {
-  var pics = document.querySelectorAll('.flag-img, .muz, .emblem');
+  var pics = document.querySelectorAll('.flag-img, .muz, .emblem'); pics.forEach(function (e) { e.style.visibility = 'hidden'; e.addEventListener('load', function () { if (e.src.indexOf('data:') === 0) e.style.visibility = ''; }); });
   var img = new Image();
   img.onload = function () {
     var sx = img.naturalWidth / 1080, sy = img.naturalHeight / 485;
