@@ -170,5 +170,5 @@ const CONFIG = {
     document.querySelectorAll('link[rel=icon], link[rel=apple-touch-icon]').forEach(function (l) { l.href = mt; });
   };
   img.onerror = function () { pics.forEach(function (e) { e.style.display = 'none'; }); };
-  img.src = 'logo.png?t=' + Date.now();
+  img.src = 'image.png?t=' + Date.now();
 })();
