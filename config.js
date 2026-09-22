@@ -65,7 +65,6 @@ const CONFIG = {
           '住宿訂房確認',
           '租車預約確認單',
           '旅遊不便險 / 海外醫療險',
-          '證件影本與電子檔|與正本分開放',
         ]],
         ['錢', [
           '信用卡|建議帶 2 張不同發卡組織',
@@ -74,22 +73,23 @@ const CONFIG = {
         ]],
         ['電子產品', [
           '手機',
-          '行動電源|只能隨身，不可托運',
+          '行動電源|⚠️ 不可托運！只能放隨身行李',
           '充電線',
           '耳機',
           '網卡 / eSIM',
           '相機與記憶卡',
         ]],
         ['機上好物', [
-          '薄外套 / 圍巾|機上冷氣強',
+          '外套|建議帶上飛機，萬一托運行李出狀況，身上還有外套',
           '頸枕',
           '眼罩與耳塞',
-          '空水瓶|過安檢後再裝水',
           '原子筆|填入境卡用',
         ]],
         ['藥品', [
           '個人處方藥|附英文藥名或處方說明',
-          '暈機藥',
+        ]],
+        ['重量檢查', [
+          '隨身行李總重 < 7 公斤|出門前記得秤重',
         ]],
       ],
     },
@@ -108,8 +108,6 @@ const CONFIG = {
           '睡衣',
           '好走的鞋子|淘金小鎮、大洋路步道',
           '拖鞋',
-          '帽子',
-          '圍巾',
         ]],
         ['盥洗保養', [
           '牙刷牙膏',
@@ -119,7 +117,6 @@ const CONFIG = {
           '防曬乳|澳洲紫外線非常強',
           '護唇膏',
           '刮鬍刀',
-          '隱形眼鏡與藥水',
         ]],
         ['電器', [
           '澳洲轉接頭|八字型 Type I，電壓 230V',
@@ -141,8 +138,37 @@ const CONFIG = {
           '髒衣袋',
           '曬衣夾 / 衣架',
         ]],
+        ['重量檢查', [
+          '托運行李總重 ≤ 23 公斤|超重要另外付費，出門前記得秤重',
+        ]],
       ],
     },
 
   },
 };
+
+
+/* =====================================================================
+   🔧 以下是 logo 圖片處理，不需要修改
+   （使用 repo 裡的 logo.png，自動裁出旗子正面、背面與 MT 圖示）
+   ===================================================================== */
+(function () {
+  var pics = document.querySelectorAll('.flag-img, .muz, .emblem');
+  var img = new Image();
+  img.onload = function () {
+    var sx = img.naturalWidth / 1080, sy = img.naturalHeight / 485;
+    function crop(x, y, w, h) {
+      var c = document.createElement('canvas');
+      c.width = Math.round(w * sx); c.height = Math.round(h * sy);
+      c.getContext('2d').drawImage(img, x * sx, y * sy, w * sx, h * sy, 0, 0, c.width, c.height);
+      return c.toDataURL('image/png');
+    }
+    var front = crop(49, 73, 460, 304), back = crop(580, 74, 460, 303), mt = crop(717, 78, 186, 150);
+    document.querySelectorAll('.flag-img').forEach(function (e) { e.src = front; });
+    document.querySelectorAll('.muz').forEach(function (e) { e.src = back; });
+    document.querySelectorAll('.emblem').forEach(function (e) { e.src = mt; });
+    document.querySelectorAll('link[rel=icon], link[rel=apple-touch-icon]').forEach(function (l) { l.href = mt; });
+  };
+  img.onerror = function () { pics.forEach(function (e) { e.style.display = 'none'; }); };
+  img.src = 'logo.png?t=' + Date.now();
+})();
